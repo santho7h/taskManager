@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 import { TaskComponent } from './task/task.component';
 import { NewtaskComponent } from './new-task/new-task.component';
+import { NewTask } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -61,4 +62,16 @@ onNewTaskCancelled() {
   console.log('New task creation cancelled');
 }
 
+onAddNewTask(taskData: NewTask) {
+  this.tasks.push({
+    id: new Date().getTime().toString(),
+    userId: this.userId,
+    title: taskData.title,
+    summary: taskData.summary,
+    dueDate: taskData.dueDate
+  });
+  this.newTaskAdded = false;
+  console.log('New task added:', taskData); 
 }
+
+} 
